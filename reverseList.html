@@ -1,0 +1,52 @@
+<h1> Test Reverse List </h1>
+<button id="b"> Click Me! </button>
+<pre id="q"></pre>
+<pre id="p"></pre>
+<script> b.onclick = function() {
+	console.log("hello");
+	var reverseList = function(head) {								// reversing a singly-linked list
+		if (head == null) return head;
+		var curr = head, after = null, before = null;
+		while(curr != null){
+			after     = curr.next;
+			curr.next = before;
+			before    = curr;
+			curr      = after;
+		}
+		return before;
+    }
+	function ListNode(val, next) {
+    	this.val = (val===undefined ? 0 : val)
+    	this.next = (next===undefined ? null : next)
+ 	}
+	function ListNode(val,prev){
+		this.val = (val===undefined ? 0 : val)
+		if(prev != null) prev.next = this;
+	}
+
+	function makeList6(){											// ListNode = [1 2 3 4 5 6] 
+		var a = new ListNode(1);
+		var b = new ListNode(2,a);
+		var c = new ListNode(3,b);
+		var d = new ListNode(4,c);
+		var e = new ListNode(5,d);
+		var f = new ListNode(6,e);
+		return a;
+	}
+	function makeList0(){											// ListNode = [] n = 1
+		return null;
+	}
+	function print(head){											// printing method of our singly-linked list
+		var s = null;
+		var p = head;
+		while(p != null){
+			if( s == null) s = "" + p.val; else s += " " + p.val;
+			p = p.next;
+		}
+		return s == null ? "" : s;
+	}
+	var head    = makeList6();
+	q.innerHTML = "Before: " + "" + print(head);
+	p.innerHTML = "After: " + "" + print(reverseList(head));
+}
+</script>
