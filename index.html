@@ -5,41 +5,36 @@
     <title>Remove Duplicates</title></head>
     <style>
         .title{
-            background-color: bisque;
-        }
-        .resolved {
-            background-color:antiquewhite;
+            background-color:rgb(238, 244, 244);
         }
         td{
-            padding: 1vw;
+            padding: .5vw;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-colour: antiquewhite;
+            margin-bottom: 10vh;
+            margin-left: 10vw;
+            margin-right: 10vw;
+            margin-top: 10vh;
         }
     </style>
     <body>
-        <h1>Remove Duplicates</h1>
+        <h1> JavaScript Solution Links</h1>
         <table>
             <colgroup>
                 <col class="title">
                 <col class="resolved">
             </colgroup>
-            <tr><td>Before<td><input id="l" value="1 2 2 2 3 4 5 6 6">
-            <tr><td>Remove Duplicates! <td><button id="b"> Click Me! </button>
-            <tr><td>All Duplicates Removed: <td><pre id="p"></pre>
-            <tr><td>DDD: <td><pre id="q"></pre>
+            <tr><td><a href = 'https://banevare.github.io/maxSubArray.html'> Maximum SubArray</a><td>
+            <tr><td><a href = 'https://banevare.github.io/deleteDuplicate.html'> Delete Duplicates</a><td>
+            <tr><td><a href = 'https://banevare.github.io/mergeTwoLists.html'> Merge Two Lists</a><td>
+            <tr><td><a href = 'https://banevare.github.io/moveZeroes.html'> Move Zeroes</a><td>
+            <tr><td><a href = 'https://banevare.github.io/reverseList.html'>Reverse LinkedList</a><td></td>
+            <tr><td><a href = 'https://banevare.github.io/reverseBetween.html'>Partially Reverse a LinkedList</a><td></td>
+            <tr><td><a href = 'https://banevare.github.io/mergeTwoLists.html'>Merge Two in Order LinkedList</a><td></td>    
         </table>
         <script> 
-            b.onclick = function() {
-            var str = l.value.split(" ");
-            var num = [];
-            var dict = {};
-            for(var s of str) dict[s] = 0;
-            for(var s of str) dict[s]++;
-            console.log(dict);
-            for(var k of Object.keys(dict)){
-                if(dict[k] == 1) num.push(k);
-            }
-            p.innerHTML = num.join(" ");
-            q.innerHTML = Object.keys(dict).join(" ");
-        }
         </script>
     </body>
 </html>
