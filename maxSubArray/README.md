@@ -1,4 +1,4 @@
-# Maximum-Subarray
+# maxSubArray
 
 ![Test](https://github.com/banevare/LinkedList/workflows/Test/badge.svg)
 
