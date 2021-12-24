@@ -1,0 +1,99 @@
+<!DOCTYPE html PUBLIC"-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head> <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css" rel="stylesheet" /> </head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>JavaScript Solution Links</title></head>
+    <style>
+        .title{
+            background-color:rgb(238, 244, 244);
+        }
+        td{
+            padding: .5vw;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-colour: antiquewhite;
+            margin-bottom: 10vh;
+            margin-left: 10vw;
+            margin-right: 10vw;
+            margin-top: 10vh;
+        }
+    </style>
+    <body>
+        <h1> topKFrequent Solution</h1>
+        <table>
+            <colgroup>
+                <col class="title">
+                <col class="resolved">
+            </colgroup>
+            <tr><td>Array<td><input id="l" value="1 2 2 2 3 4 5 6 6">
+            <tr><td>Array<td><input id="m" value="2">
+            <tr><td>Find topKFrequent values! <td><button id="b"> Click Me! </button>
+            <tr><td>Top K<td><pre id="p"></pre>
+        </table>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-core.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js"></script>
+        <pre> 
+            <code class="language-java">
+                class Pair implements Comparable<Pair>{
+                    int key;
+                    int value;
+                    public Pair(int key, int value){
+                        this.key = key;
+                        this.value = value;
+                    }
+                   public int compareTo(Pair p) {
+                       int a = this.value;
+                       int b = p.value;
+                    //    System.out.println("a: " + a + "--- b: " + b);
+                       if (a < b) return -1;
+                       else if( a > b) return  1;
+                       else return 0;
+                    }
+                    public String toString(){
+                       return "key: " + this.key + " -- val: " + this.value;
+                    }
+                }
+                public int[] topKFrequent(int[] nums, int k) {
+                    if(k > nums.length) k = nums.length;
+                    Map<Integer,Integer> map = new HashMap<>();
+                    for(int i = 0; i < nums.length; i++){
+                        if(!map.containsKey(nums[i])) map.put(nums[i],1);
+                        else map.put(nums[i],map.get(nums[i])+1);
+                    }
+                    Pair[] pairs = new Pair[map.size()];
+                    int i = 0;
+                    for(Integer key : map.keySet()) pairs[i++] =  new Pair(key, map.get(key));
+                    Arrays.sort(pairs, Collections.reverseOrder());
+                    int[] a =  new int[k];
+                    for(int j = 0; j < a.length; j++) a[j] = pairs[j].key;
+                    return a;
+                }
+            </code>
+        </pre>    
+        <script> 
+        b.onclick = function() {
+            var nums = l.value.split(" ");
+            var k = m.value;
+            console.log(k);
+            console.log(nums);
+            var dict = {};
+            for(var n of nums) dict[n] = 0;
+            for(var n of nums) dict[n]++;
+            var items = Object.keys(dict).map(function(key) {
+                return [key, dict[key]];
+            });
+            items.sort(function(first, second) {
+             return second[1] - first[1];
+            });
+            console.log(items);
+            var a = [];
+            console.log(a);
+            for(var i = 0; i < k; i++){
+                a[i] = items[i][0];
+            }
+            p.innerHTML = a;
+    }
+        </script>
+    </body>
+</html>
