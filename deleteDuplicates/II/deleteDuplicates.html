@@ -1,33 +1,107 @@
 <!DOCTYPE html PUBLIC"-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
+    <head> <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css" rel="stylesheet" /> </head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>Remove Duplicates</title></head>
+    <title>JavaScript Solution Links</title></head>
     <style>
         .title{
-            background-color: bisque;
-        }
-        .resolved {
-            background-color:antiquewhite;
+            background-color:rgb(238, 244, 244);
         }
         td{
-            padding: 1vw;
+            padding: 1.5vw;
+
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-colour: antiquewhite;
+            margin-bottom: 10vh;
+            margin-left: 10vw;
+            margin-right: 10vw;
+            margin-top: 10vh;
+        }
+        .input{
+            background-color:plum;
+        }
+        .k{
+            background-color:palegoldenrod;
+        }
+        .output{
+            background-color:peachpuff;
         }
     </style>
     <body>
-        <h1>Remove Duplicates</h1>
+        <h1> deleteDuplicates II Solution</h1>
+        <p> Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.</p>
         <table>
             <colgroup>
                 <col class="title">
                 <col class="resolved">
             </colgroup>
-            <tr><td>Before<td><input id="l" value="1 2 2 2 3 4 5 6 6">
+            <tr><td>Before<td><input id="l" value="1 1 1 2 2 2 3">
             <tr><td>Remove Duplicates! <td><button id="b"> Click Me! </button>
-            <tr><td>All Duplicates Removed: <td><pre id="p"></pre>
-            <tr><td>DDD: <td><pre id="q"></pre>
+            <tr><td>All Duplicates Removed<td><pre id="p"></pre>
         </table>
-        <script> 
-            b.onclick = function() {
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-core.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js"></script>
+        <h2>Test</h2>
+        <p>Here is some sample input/output and expected output for the program.</p>
+        <table>
+            <colgroup><col class="input"><col class="k"><col class="output"></colgroup>  
+            <tr>
+            <th>Input: </th>
+            <th>Expected Output:</th>
+            <tr>
+            <td>1 2 3</td>
+            <td>1 2 3</td>
+            <tr>
+            <td>1 2 2 3</td>
+            <td>1 3</th>
+            <tr>
+            <td>1 2 2 2 3 4 4 4 5</td>
+            <td>1 3 5</th>
+            <tr>
+            
+        </table>
+        <h2>Code</h2>
+        <p>Here is the JavaScript ode I wrote to implement this algorithm.</p>
+        <pre> 
+            <code class="language-javascript">
+                var deleteDuplicates = function(head) {                                                      // deletes duplicates from a singly-linked list
+                    if (head == null || head.next == null) return head;
+                    var a = head, b = a.next, c = b.next;
+                    while (a.val == b.val){                                                                  // duplicates @ beginning
+                        while (c != null && c.val == a.val) c = c.next;                                      // looks for all consecutive nodes to delete
+                        a = head = c; if (a == null) return head;
+                        b = a.next;   if (b == null) return head;
+                    }
+                    while (a != null) {                                                                      // step 3 nodes at a time looking for duplicates
+                        b = a.next;
+                        c = b != null ? b.next : null;
+                        if (b != null && c != null && a.val != b.val && b.val == c.val){
+                            var p = c.next;
+                            while(p != null && p.val == c.val) {                                             // looks for all consecutive nodes to delete
+                                if (p.next != null) p = p.next;
+                                else {
+                                    a.next = null;                                                            // end of list being a duplicate
+                                    return head;
+                                }
+                            }
+                            a.next = p;                                                                       // delete duplicates
+                            continue;                                                                                
+                        }
+                        else if (b != null && c != null) a = a.next;                                          // no consecutive duplicates
+                        else break;                                                                           // end of list  
+                    }
+                    return head;
+                };
+            </code>
+        </pre>
+        <h2>Diagram</h2>
+        <p>Here is the diagram I drew for the program to  delete all nodes that have duplicate numbers, 
+        leaving only distinct numbers from the original list.</p>
+        <img src="https://banevare.github.io/deleteDuplicates/II/deleteDuplicatesII.svg">
+        <script>  
+        b.onclick = function() {
             var str = l.value.split(" ");
             var num = [];
             var dict = {};
@@ -38,7 +112,6 @@
                 if(dict[k] == 1) num.push(k);
             }
             p.innerHTML = num.join(" ");
-            q.innerHTML = Object.keys(dict).join(" ");
         }
         </script>
     </body>
