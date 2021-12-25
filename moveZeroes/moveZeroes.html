@@ -1,43 +1,118 @@
-<h1> Test Reverse List </h1>
-<table>
-	<tr><td>Before<td><input id="l" value="1 0 5 0 0 6 0 0 0 3 4"> 
-	<tr><td>Move Zeroes!<td><button id="b"> Click Me! </button>
-	<tr><td>After: <td><pre id="p"></pre>
-</table>
-<script> b.onclick = function() {
-	var moveZeroes = function() {
-        var nums = l.value.split(" ");
-        console.log(nums);
-        if(nums.length == 0) return;
-        var j = 0;
-        for(; j < nums.length; j++) if(nums[j] != 0) break;
-        if(j == nums.length) return;                                                        // all zeroes array
-        for(var i = 0; i < nums.length; i++){
-            if(nums[i] == 0){
-                for(; j < nums.length; j++){
-                    if(nums[j] != 0 && j > i){
-                        swap(i,j,nums);
-                    break;
+<!DOCTYPE html PUBLIC"-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head> <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css" rel="stylesheet" /> </head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>JavaScript Solution Links</title></head>
+    <style>
+        .title{
+            background-color:rgb(238, 244, 244);
+        }
+        td{
+            padding: 1.5vw;
+
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-colour: antiquewhite;
+            margin-bottom: 10vh;
+            margin-left: 10vw;
+            margin-right: 10vw;
+            margin-top: 10vh;
+        }
+        .input{
+            background-color:plum;
+        }
+        .k{
+            background-color:palegoldenrod;
+        }
+        .output{
+            background-color:peachpuff;
+        }
+    </style>
+    <body>
+        <h1> topKFrequent Solution</h1>
+        <p> Given an integer array nums and an integer k, return the k most frequent elements. You may return the answer in any order.</p>
+        <table>
+            <colgroup>
+                <col class="title">
+                <col class="resolved">
+            </colgroup>
+            <tr><td>Array<td><input id="l" value="1 0 5 0 0 6 0 0 0 3 4">
+            <tr><td>Move Zeroes! <td><button id="b"> Click Me! </button>
+            <tr><td>Top K<td><pre id="p"></pre>
+        </table>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-core.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js"></script>
+        <h2>Test</h2>
+        <p>Here is some sample input/output and expected output for the program.</p>
+        <table>
+            <colgroup><col class="input"><col class="k"><col class="output"></colgroup>  
+            <tr>
+            <th>Input: </th>
+            <th>Expected Output:</th>
+            <tr>
+            <td>1 0</td>
+            <td>1 0</th>
+            <tr>
+            <td>0 1 0 3 12</td>
+            <td>1 3 12 0 0</td>
+            <tr>
+            <td>0 4 0 0 6 3 0 1 0 0 0 9</td>
+            <td>4 6 3 1 9 0 0 0 0 0 0 0</td>
+            
+        </table>
+        <h2>Code</h2>
+        <p>Here is th JavaScript code I wrote to implement this algorithm.</p>
+        <pre> 
+            <code class="language-javascript">
+                var moveZeroes = function(nums) {
+                    if(nums.length == 0) return;
+                    var j = 0;
+                    for(; j < nums.length; j++) if(nums[j] != 0) break;
+                    if(j == nums.length) return;                                                        // all zeroes array
+                    for(var i = 0; i < nums.length; i++){
+                        if(nums[i] == 0){
+                            for(; j < nums.length; j++){
+                                if(nums[j] != 0 && j > i){
+                                    swap(i,j,nums);
+                                   break;
+                               }
+                            }
+                        }
+                    }
+                }
+                var swap = function(i,j,nums){
+                    var temp = nums[i];
+                    nums[i]  = nums[j];
+                    nums[j]  = temp;
+                };
+            </code>
+        </pre>
+        <script>  
+        b.onclick = function() {
+            var nums = l.value.split(" ");
+            console.log(nums);
+            if(nums.length == 0) return;
+            var j = 0;
+            for(; j < nums.length; j++) if(nums[j] != 0) break;
+            if(j == nums.length) return;                                                        // all zeroes array
+            for(var i = 0; i < nums.length; i++){
+                if(nums[i] == 0){
+                    for(; j < nums.length; j++){
+                        if(nums[j] != 0 && j > i){
+                            swap(i,j,nums);
+                        break;
+                        }
                     }
                 }
             }
+            p.innerHTML = nums.join(" ");
         }
-        return nums;
-    }
-    var swap = function(i,j,nums){
-        var temp = nums[i];
-        nums[i]  = nums[j];
-        nums[j]  = temp;
-    }
-    var toString = function(arr){									        // convert int array to string array
-		var s = "";
-        for(var i = 0; i < arr.length; i++){
-            if(i == arr.length - 1) s += Integer.toString(arr[i]);
-            else s += Integer.toString(arr[i]) + " ";
-        }
-        return s;
-	}
-	p.innerHTML = moveZeroes();
-}
-</script>
-
+        var swap = function(i,j,nums){
+            var temp = nums[i];
+            nums[i]  = nums[j];
+            nums[j]  = temp;
+        };
+        </script>
+    </body>
+</html>
