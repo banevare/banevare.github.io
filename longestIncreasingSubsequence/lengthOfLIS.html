@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC"-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head> <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/themes/prism.min.css" rel="stylesheet" /> </head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>JavaScript Solution Links</title></head>
+    <style>
+        .title{
+            background-color:rgb(238, 244, 244);
+        }
+        td{
+            padding: 1.5vw;
+
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-colour: antiquewhite;
+            margin-bottom: 10vh;
+            margin-left: 10vw;
+            margin-right: 10vw;
+            margin-top: 10vh;
+        }
+        .input{
+            background-color:plum;
+        }
+        .k{
+            background-color:palegoldenrod;
+        }
+        .output{
+            background-color:peachpuff;
+        }
+    </style>
+    <body>
+        <h1> Length of Longest Increasing Subsequence Solution</h1>
+        <p> Given an integer array "nums," return the length of the longest structly increasing subsequence.</p>
+        <table>
+            <colgroup>
+                <col class="title">
+                <col class="resolved">
+            </colgroup>
+            <tr><td>Array<td><input id="l" value="4 7 9 8">
+            <tr><td>Find Longest Increasing Sequence <td><button id="b"> Click Me! </button>
+            <tr><td>Length<td><pre id="p"></pre>
+        </table>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/components/prism-core.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.25.0/plugins/autoloader/prism-autoloader.min.js"></script>
+        <h2>Test</h2>
+        <p>Here is some sample input/output and expected output for the program.</p>
+        <table>
+            <colgroup><col class="input"><col class="k"><col class="output"></colgroup>  
+            <tr>
+            <th>Input: </th>
+            <th>Expected Output:</th>
+            <tr>
+            <td>10,9,2,5,3,7,101,18</td>
+            <td>4</th>
+            <tr>
+            <td>7,7,7,7,7,7,7</td>
+            <td>1</td>
+            <tr>
+            <td>0,1,0,3,2,3</td>
+            <td>4</td>
+            
+        </table>
+        <h2>Code</h2>
+        <p>Here is th JavaScript code I wrote to implement this algorithm.</p>
+        <pre> 
+            <code class="language-javascript">
+                var lengthOfLIS = function(nums) {
+                    var LIS = new Array();  
+                    for(var i= 0; i < nums.length; i++) LIS[i] = 1;                         // initialize every entry as 1 
+                    var maxVal = 1;
+                    for(var j = nums.length - 1; j >= 0; j--){                              // traverse from end to beginning using         
+                        for (var k = j - 1; k >= 0; k--){                                   // previous values to update LIS list 
+                            if(nums[k] < nums[j]){
+                                LIS[k] = Math.max(LIS[k],1 + LIS[j]);
+                                if (LIS[k] > maxVal) maxVal = LIS[k];
+                            }
+                        }
+                    }
+                    return maxVal;                                                          // returns maximum # of subsequence
+                };
+            </code>
+        </pre>
+        <h2>Diagram</h2>
+        <p>Here is the diagram I drew for the program.</p>
+        <img src="https://banevare.github.io/longestIncreasingSubsequence/LengthOfLIS.svg">
+        <script>  
+        b.onclick = function() {
+            var nums = l.value.split(" ");
+            console.log(nums);
+            var LIS = new Array();  
+            for(var i= 0; i < nums.length; i++){                                    // initialize every entry as 1 
+                LIS[i] = 1;
+            }
+            var maxVal = 1;
+            for(var j = nums.length - 1; j >= 0; j--){                              // traverse from end to beginning using         
+                for (var k = j - 1; k >= 0; k--){                                   // previous values to update LIS list 
+                    if(nums[k] < nums[j]){
+                        LIS[k] = Math.max(LIS[k],1 + LIS[j]);
+                        if (LIS[k] > maxVal) maxVal = LIS[k];
+                    }
+                }
+            }
+            p.innerHTML = maxVal;    
+        }
+        </script>
+    </body>
+</html>
